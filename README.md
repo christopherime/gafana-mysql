@@ -1,2 +1,2 @@
-# gafana-mysql
+# grafana-mysql
 Grafana application using external database
