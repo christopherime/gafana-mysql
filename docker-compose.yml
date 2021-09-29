@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+
+  grafana:
+    container_name: grafana
+    restart: on-failure
+    volumes:
+        - $PWD/grafana.ini:/etc/grafana/grafana.ini
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    image: grafana/grafana
+
+  db:
+    container_name: mysql
+    volumes:
+      - mysql_db:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_USER: someuser
+      MYSQL_PASSWORD: Password1!
+      MYSQL_DATABASE: somedatabase
+    ports:
+      - 3306:3306
+    image: mysql
+
+volumes:
+  mysql_db:
